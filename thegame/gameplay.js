@@ -30,8 +30,7 @@ players.push(player1);
 let player2 = new Block("#0ff");
 players.push(player2);
 
-// var mapNum = Math.floor(Math.random() * 2) + 1;
-var mapNum = 3;
+var mapNum = Math.floor(Math.random() * 2) + 1;
 let platforms = [];
 let Answers = [];
 let AnswerPos = [[0,0], [0,0], [0,0], [0,0]];
