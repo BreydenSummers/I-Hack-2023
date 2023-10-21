@@ -66,16 +66,17 @@ function draw() {
 }
 
 function gameLoop() {
-    // potentially pull from server for multiplayer data
-    // update game data
-    updateGameData();
-    draw();
-
-    // draw
-    requestAnimationFrame(gameLoop);
+    console.log("I am running")
     if(running == true){
-      console.log(data);
-    }
+        document.getElementById("titleScreen").style.display = "none"
+        // potentially pull from server for multiplayer data
+        // update game data
+        updateGameData();
+        draw();
+        // draw
+        requestAnimationFrame(gameLoop);
+        console.log(data);
+   }
 
 }
 function bootstrapGame(form){
@@ -84,21 +85,20 @@ function bootstrapGame(form){
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
-    .then(run => running = true);
+    .then(run => running = true)
+    .then(gameStart());
 
-    gameStart();
+    // gameStart();
 }
 
 
 function gameStart() {
     // load assets
  
-    
     // load levels and initiate characters
-    if(document.getElementById("titleScreen").style.visibility == "visible"){
-        gameLoop();
-    }
+    gameLoop();
     
 }
+gameLoop();
 
 
