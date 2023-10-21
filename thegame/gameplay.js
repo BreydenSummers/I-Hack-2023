@@ -38,10 +38,27 @@ let game1Platforms = [
     new Platform( canvas.width/2, canvas.height/2),
     new Platform(100, canvas.height-(canvas.height/6)),
     new Platform(300, canvas.height-(canvas.height/4))
+];
+let game2Platforms = [
+    new Platform(0, canvas.height-250, 100, 100),
+    new Platform(0, canvas.height-25, 100, 100),
+    new Platform(100, canvas.height-200, 100, 100),
+    new Platform(200, canvas.height-150, 100, 100),
+    new Platform(canvas.width-100, canvas.height-250, 100, 100),
+    new Platform(canvas.width-100, canvas.height-25, 100, 100),
+    new Platform(canvas.width-200, canvas.height-200, 100, 100),
+    new Platform(canvas.width-300, canvas.height-150, 100, 100),
+    new Platform(260, canvas.height-80, 100, 30),
+    new Platform((canvas.width/2)+50, canvas.height - 80, 100, 30),
 
-]
+    new Platform(140, 175, 100, 30),
+    new Platform(240, 150, 100, 30),
+    new Platform(340, 125, 100, 30),
+    new Platform(440, 150, 100, 30),
+    new Platform(540, 175, 100, 30),
+];
 
-let game1 = new Map(game1Platforms);
+let game1 = new Map(game2Platforms);
 
 
 
@@ -120,8 +137,9 @@ function draw() {
 
 }
 
+let start = Date.now();
+let doLoop = true
 function gameLoop() {
-    let start = Date.now();
     if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "none";
@@ -165,21 +183,28 @@ function gameLoop() {
 
         }
 
-
-
-
-
-        
+        if(doLoop){
+            // potentially pull from server for multiplayer data
+            // update game data
+            updateGameData();
+            draw();
+            console.log(data);
+        }
    } else if(running == false && loading == true){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "flex"
 
 
     }
-    current_frame_duration += Date.now() - start;
-    if (current_frame_duration > FRAME_DURATION) {
-        current_frame_duration = 0;
+    doLoop = false;
+    if(Date.now() - start > FRAME_DURATION){
+        start = Date.now()
+        doLoop = true;
     }
+    // current_frame_duration += Date.now() - start;
+    // if (current_frame_duration - start > FRAME_DURATION) {
+    //     current_frame_duration = 0;
+    // }
 
     requestAnimationFrame(gameLoop);
 }
