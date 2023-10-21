@@ -1,6 +1,6 @@
 let rightPressed;
 let leftPressed;
-let motionDirection = 1;
+let motionX = 2;
 
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
@@ -30,13 +30,16 @@ function keyUpHandler(e) {
 }
 
 function updateBlock() {
-    if (rightPressed) {
-        blockX += 7;
+    if ( rightPressed && motionX < 0 || leftPressed && motionX > 0 ) {
+        motionX = -motionX;
     }
 
-    else if (leftPressed) {
-        blockX -= 7;
+    if (blockX <= 2 || blockX >= canvas.width - blockWidth){
+        motionX = -motionX;
     }
+
+    blockX += motionX;
+    
 }
 
 function updateGameData() {
@@ -76,6 +79,7 @@ function gameLoop() {
     // update game data
     updateGameData();
     draw();
+
     // draw
     requestAnimationFrame(gameLoop);
 }
