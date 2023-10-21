@@ -27,16 +27,17 @@ class Block {
 
     // takes in a platform object as an argument. returns if block is on platform
     blockOnPlatform(platform) {
-    if (this.x >= platform.x && this.x <= platform.x + platform.length) {
-        if ( this.y === platform.y - this.y ){
-            return true;
+        if (this.x >= platform.x && this.x <= platform.x + platform.length) {
+            if ( this.y === platform.y - this.y ){
+                return true;
+            }
+            
         }
-        
+
+        return false;
     }
 
-    return false;
-    }
-    update() {
+    update(platforms) {
         this.blockJump();
         if ( rightPressed && this.motionX < 0 || leftPressed && this.motionX > 0 ) {
             this.motionX = -this.motionX;
@@ -46,12 +47,34 @@ class Block {
             this.motionX = -this.motionX;
         }
     
-        this.x += this.motionX;
-
         if( true ){ // if not on platform
             this.motionY += GRAVITY;
         }
+
+        platforms.forEach((platform)=>{
+            if(
+                // move left
+                (
+                this.motionX < 0 &&
+                this.x + this.motionX < platform.x + platform.width &&
+                this.y + this.height + this.motionY > platform.y &&
+                this.y + this.motionY < platform.y + platform.height
+                )
+                ||
+                // move right
+                (
+                this.motionX > 0 &&
+                this.x + this.width + this.motionX > platform.x &&
+                this.y + this.height + this.motionY > platform.y &&
+                this.y + this.motionY < platform.y + platform.height
+                )
+            ) {
+                this.motionX = -this.motionX
+            }
+        });
         
+        this.x += this.motionX;
+
         this.y += this.motionY;
 
         if ( this.y <= 0 ) {
