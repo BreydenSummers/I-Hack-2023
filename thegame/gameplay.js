@@ -7,7 +7,7 @@ class Block {
         this.jumpHeight = 75;
         this.jumping = false;
         this.jumpStartY = 0;
-        this.motionX = 4;
+        this.motionX = 7;
         this.motionY = 0;
     }
 
@@ -20,7 +20,7 @@ class Block {
     }
 
     blockJump() {
-        if (upPressed && true) { // true should be on platform
+        if ( upPressed && true ) { // true should be on platform
             this.motionY = -5;
         }
     }
@@ -48,18 +48,29 @@ class Block {
     
         this.x += this.motionX;
 
-        if(true){ // if not on platform
+        if( true ){ // if not on platform
             this.motionY += GRAVITY;
         }
-
+        
         this.y += this.motionY;
+
+        if ( this.y <= 0 ) {
+            this.motionY = 0;
+            this.y = 0;
+        }
+        
+       
+
+        
+        
+        
     }
 }
 
 let rightPressed;
 let leftPressed;
 let upPressed;
-const GRAVITY = 0.3;
+const GRAVITY = 0.5;
 
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
