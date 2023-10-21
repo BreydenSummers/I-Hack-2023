@@ -34,6 +34,7 @@ canvas{
     display: flex;
     flex-direction: column;
     align-items: center;
+    visibility: visible;
 }
 
 #titleScreen h1{
@@ -45,7 +46,6 @@ canvas{
     margin: 0px;
     margin-bottom: 8vh;
     text-decoration: underline wavy orange;
-
 }
 
 form{
@@ -90,6 +90,21 @@ label{
 #playerCount{
     margin-bottom: 7vh;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .wrapper{
     z-index: 2;

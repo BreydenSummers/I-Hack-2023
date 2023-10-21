@@ -73,9 +73,6 @@ function gameLoop() {
 
     // draw
     requestAnimationFrame(gameLoop);
-    if(running == true){
-      console.log(data);
-    }
 
 }
 function bootstrapGame(form){
@@ -92,10 +89,13 @@ function bootstrapGame(form){
 
 function gameStart() {
     // load assets
- 
+    document.getElementById("start").addEventListener('click', function (){
+        console.log("Happy Wedding C/ McKee!");
+        document.getElementById("titleScreen").style.visibility = "hidden";
+    })
     
     // load levels and initiate characters
-    if(document.getElementById("titleScreen").style.visibility == "visible"){
+    if(document.getElementById("titleScreen").style.visibility != "visible"){
         gameLoop();
     }
     
