@@ -14,16 +14,6 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 let player1 = new Block();
-<<<<<<< Updated upstream
-=======
-players.push(player1);
-
-let platforms = [];
-let platform1 = new Platform(canvas.width/2, canvas.height/2, 100, 300);
-platforms.push(platform1);
-let platform2 = new Platform(300, 470, 100, 30);
-platforms.push(platform2);
->>>>>>> Stashed changes
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
