@@ -1,6 +1,7 @@
 
 var data;
 var running = false;   
+var loading = false;
 
 let rightPressed;
 let leftPressed;
@@ -66,15 +67,20 @@ function draw() {
 }
 
 function gameLoop() {
-    console.log("I am running")
-    if(running == true){
+    if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
+        document.getElementById("loading").style.display = "none"
         // potentially pull from server for multiplayer data
         // update game data
         updateGameData();
         draw();
         // draw
         console.log(data);
+   } else if(running == false && loading == true){
+        document.getElementById("titleScreen").style.display = "none"
+        document.getElementById("loading").style.display = "flex"
+
+
    }
    requestAnimationFrame(gameLoop);
 
@@ -82,13 +88,13 @@ function gameLoop() {
 }
 function bootstrapGame(form){
     console.log(form)
+    loading = true;
     fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
-    .then(run => running = true);
-
-    // gameStart();
+    .then(run => running = true)
+    .then(run2 => loading = false);
 }
 
 

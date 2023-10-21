@@ -47,7 +47,14 @@ canvas{
     text-decoration: underline wavy orange;
 
 }
-
+#loading {
+    position: absolute;
+    height: 80vh;
+    width: 80vw;
+    background-color: rgb(36, 36, 36);
+    display: none;
+    color: white;
+}
 form{
     display: flex;
     flex-direction: column;
