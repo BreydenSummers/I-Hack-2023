@@ -1,3 +1,7 @@
+let rightPressed;
+let leftPressed;
+let motionDirection = 1;
+
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
 ctx.fillStyle = "lightblue";
@@ -6,6 +10,9 @@ ctx.fillStyle = "white";
 ctx.fillRect(200, 200, 50, 50);
 ctx.fillStyle = "brown";
 ctx.fillRect(150, 250, 150, 150);
+
+let blockWidth = 25;
+let blockX = (canvas.width-blockWidth)/2;
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
@@ -33,6 +40,15 @@ function updateGameData() {
     
 }
 
+function drawBlock() {
+    
+    ctx.beginPath();
+    ctx.rect(blockX, canvas.height/2, blockWidth, blockWidth);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+
 function draw() {
     // draw in order of
     // background
@@ -40,6 +56,14 @@ function draw() {
     // players
     // On top of screen UI
 
+    drawBlock();
+    if (rightPressed) {
+       blockX += 7;
+    }
+
+    else if (leftPressed) {
+        blockX -= 7;
+    }
 }
 
 function gameLoop() {
@@ -56,5 +80,3 @@ function gameStart() {
 }
 
 gameStart();
-
-
