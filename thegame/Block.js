@@ -1,6 +1,6 @@
 class Block {
     constructor() {
-        this.x = 50;
+        this.x = 150;
         this.y = canvas.height/2;
         this.width = 25;
         this.height = 25;
@@ -62,22 +62,41 @@ class Block {
             ) {
                 if (
                     (
-                        //collide left
-                            this.motionX < 0
-                        &&  this.x + this.motionX < platform.x + platform.width
-                        //&&  !(this.x + this.motionX < platform.x)
-                    )
-                ) {
-                    this.motionX = -1 * Math.abs(this.motionX)
-                }
-                if (
-                    (
                         //collide right
                             this.motionX > 0
-                        &&  this.x + this.width + this.motionX > platform.x
+                            &&  this.x + this.width + this.motionX > platform.x
+                            &&  this.x + this.width < platform.x
+                            && !(this.x + this.motionX > platform.x + platform.width )
+                            )
+                            ) {
+                                this.motionX = -1 * Math.abs(this.motionX);
+                                this.x = platform.x - this.width - 1;
+                            }
+                if (
+                    (
+                        //collide left
+                            this.motionX < 0
+                            &&  this.x + this.motionX <= platform.x + platform.width
+                            &&  this.x >= platform.x + platform.width
+                            //&&  !(this.x + this.width + this.motionX < platform.x)
                     )
                 ) {
-                    this.motionX = -1 * Math.abs(this.motionX)
+                    this.motionX = 1 * Math.abs(this.motionX);
+                    this.x = platform.x + platform.width + 1;
+                }
+            }
+
+            //
+            if (
+                this.x + this.width + this.motionX > platform.x
+            &&  this.x + this.motionX < platform.x + platform.width
+            ) {
+                if (
+                    this.y + this.height + this.motionY > platform.y
+                &&  this.y + this.height < platform.y
+                ) {
+                    this.motionY = 0;
+                    this.y = platform.y - this.height - 1;
                 }
             }
         });
