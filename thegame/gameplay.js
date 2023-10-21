@@ -2,6 +2,8 @@
 var data;
 var running = false;   
 var loading = false;
+var questionTime = Date.now();
+var questionBool = false;
 
 const FPS = 60;
 const FRAME_DURATION = 8 / FPS;
@@ -123,21 +125,51 @@ function gameLoop() {
     if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "none";
-        if(questionPrint == false){
-            const question = document.createElement("h1");
-            question.innerHTML = data['question'];
-            question.id = "question";
-            document.getElementById("questionBox").appendChild(question);
-            questionPrint = true;
+        document.getElementById("questionDisplay").style.display = "none";
+
+        if(Date.now() - questionTime > 5000){
+            if(questionPrint == false){
+                const question = document.createElement("h1");
+                question.innerHTML = data['question'];
+                question.id = "question";
+                document.getElementById("questionBox").appendChild(question);
+                questionPrint = true;
+            }
+    
+            if(current_frame_duration === 0){
+                // potentially pull from server for multiplayer data
+                // update game data
+                updateGameData();
+                draw();
+                console.log(data);
+            }
+        } else{
+            if(questionBool == false){
+                const question = document.createElement("h1");
+                question.innerHTML = data['question'];
+                question.id = "questionloading";
+                document.getElementById("questionDisplay").appendChild(question);
+
+                const div = document.createElement("div");
+                div.innerHTML = 5 - (Date.now() - questionTime) / 1000;
+                div.id = "questionTime";
+                document.getElementById("questionDisplay").appendChild(div);
+
+            }
+            questionBool = true;
+            document.getElementById("questionDisplay").style.display = "flex";
+            document.getElementById("questionTime").innerHTML = Math.round(5 - (Date.now() - questionTime) / 1000);
+
+
+
+
         }
 
-        if(current_frame_duration === 0){
-            // potentially pull from server for multiplayer data
-            // update game data
-            updateGameData();
-            draw();
-            console.log(data);
-        }
+
+
+
+
+        
    } else if(running == false && loading == true){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "flex"
@@ -158,7 +190,8 @@ function bootstrapGame(form){
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
-    .then(run => running = true)
+    .then(run0 => questionTime = Date.now())
+    .then(run1 => running = true)
     .then(run2 => loading = false)
     .then(run3 => {
 
