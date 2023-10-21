@@ -31,11 +31,10 @@ class Block {
         if ( this.y === platform.y - this.y ){
             return true;
         }
-        
     }
-
     return false;
     }
+
     update() {
         this.blockJump();
         if ( rightPressed && this.motionX < 0 || leftPressed && this.motionX > 0 ) {
@@ -57,6 +56,11 @@ class Block {
         if ( this.y <= 0 ) {
             this.motionY = 0;
             this.y = 0;
+        }
+
+        if ( this.y >= canvas.height ) {
+            this.motion = 0;
+            this.y = canvas.height;
         }
         
        
