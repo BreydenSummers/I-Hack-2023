@@ -89,7 +89,6 @@ function gameLoop() {
         // update game data
         updateGameData();
         draw();
-        // draw
         console.log(data);
    }
    requestAnimationFrame(gameLoop);
