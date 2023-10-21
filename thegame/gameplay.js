@@ -47,7 +47,7 @@ function updateGameData() {
 }
 
 function drawLevel() {
-    ctx.fillStyle = "lightblue";
+    ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     // ctx.fillStyle = "white";
     // ctx.fillRect(200, 200, 50, 50);
