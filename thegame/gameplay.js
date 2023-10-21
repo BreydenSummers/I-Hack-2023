@@ -149,7 +149,7 @@ function updateGameData() {
         answer.update(players)
     })
 
-    game1Platforms.forEach((platform)=>{
+    gamePlatforms.forEach((platform)=>{
         platform.update()
     });
 }
