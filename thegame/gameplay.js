@@ -18,11 +18,21 @@ let players = [];
 let player1 = new Block();
 players.push(player1);
 
+
+
 let platforms = [];
 let platform1 = new Platform(200, 350, 100, 300);
 platforms.push(platform1);
 let platform2 = new Platform(300, 470, 100, 30);
 platforms.push(platform2);
+
+let Answers = [];
+let AnswerPos = [[400,400], [0,200], [500, 400], [200,200]]
+function setupAnswer(x, y, text, correct){
+    let answer = new Answer(x,y, text, correct);
+    Answers.push(answer);
+}
+
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -54,6 +64,9 @@ function updateGameData() {
     players.forEach((player)=>{
         player.update(platforms)
     });
+    Answers.forEach((answer) => {
+        answer.update(players)
+    })
 
 }
 
@@ -79,6 +92,9 @@ function draw() {
     platforms.forEach((platform)=>{
         platform.draw()
     });
+    Answers.forEach((answer) => {
+        answer.draw();
+    });
 
 }
 
@@ -90,7 +106,6 @@ function gameLoop() {
         // update game data
         updateGameData();
         draw();
-        console.log(data);
    } else if(running == false && loading == true){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "flex"
@@ -109,7 +124,19 @@ function bootstrapGame(form){
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
     .then(run => running = true)
-    .then(run2 => loading = false);
+    .then(run2 => loading = false)
+    .then(run3 => {
+
+        answer1 = data["answers"]["A"];
+        answer2 = data["answers"]["B"];
+        answer3 = data["answers"]["C"];
+        answer4 = data["answers"]["D"];
+        console.log(AnswerPos[0][0])
+        setupAnswer(AnswerPos[0][0],AnswerPos[0][1],answer1, "A" == data["solution"]);
+        setupAnswer(AnswerPos[1][0],AnswerPos[1][1],answer2, "B" == data["solution"]);
+        setupAnswer(AnswerPos[2][0],AnswerPos[2][1],answer3, "C" == data["solution"]);
+        setupAnswer(AnswerPos[3][0],AnswerPos[3][1],answer4, "D" == data["solution"]);
+    });
 }
 
 
