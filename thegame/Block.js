@@ -6,6 +6,7 @@ class Block {
         this.height = 25;
         this.motionX = 7;
         this.motionY = 0;
+        this.onPlatform = false;
         this.color = "#FF46F4";
     }
 
@@ -18,7 +19,7 @@ class Block {
     }
 
     blockJump() {
-        if ( upPressed && this.onBottom() ) { // true should be on platform
+        if ( upPressed && (this.onBottom() || this.onPlatform) ) { // true should be on platform
             this.motionY = -10;
         }
     }
@@ -93,10 +94,20 @@ class Block {
                     this.y + this.height + this.motionY > platform.y
                 &&  this.y + this.height < platform.y
                 ) {
+                    this.onPlatform = true;
                     this.motionY = 0;
                     this.y = platform.y - this.height - 1;
                 }
+                else {
+                    this.onPlatform = false;
+                }
             }
+            // check if top hits a platform 
+            if ( this.y <= platform.y + platform.height ) {
+                if ( this.x > platform.x && this.x < platform.x + platform.width ) {
+                    this.y = platform.y + platform.height; 
+                }
+            } 
         });
         
         this.x += this.motionX;

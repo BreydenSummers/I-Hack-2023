@@ -21,7 +21,7 @@ players.push(player1);
 let platforms = [];
 let platform1 = new Platform(200, 350, 100, 300);
 platforms.push(platform1);
-let platform2 = new Platform(300, 470, 100, 30);
+let platform2 = new Platform(300, 350, 100, 100);
 platforms.push(platform2);
 
 function keyDownHandler(e) {
