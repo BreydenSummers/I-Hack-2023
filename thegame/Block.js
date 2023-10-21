@@ -1,5 +1,5 @@
 class Block {
-    constructor() {
+    constructor(color) {
         this.x = 150;
         this.y = canvas.height/2;
         this.width = 25;
@@ -7,7 +7,7 @@ class Block {
         this.motionX = 1.9;
         this.motionY = 0;
         this.onPlatform = false;
-        this.color = "#FF46F4";
+        this.color = color;
     }
 
     draw() {
@@ -34,24 +34,28 @@ class Block {
         return false;
     }
 
-    update(platforms) {
+    update(platforms, inputs) {
         // check jump
-        if ( upPressed && (this.onBottom() || this.onPlatform) ) { // true should be on platform
+        if ( inputs.upPressed && (this.onBottom() || this.onPlatform) ) { // true should be on platform
             this.motionY = -10;
         }
 
-        if ( rightPressed && this.motionX < 0 || leftPressed && this.motionX > 0 ) {
+        // check right and left
+        if ( inputs.rightPressed && this.motionX < 0 || inputs.leftPressed && this.motionX > 0 ) {
             this.motionX = -this.motionX;
         }
     
+        // right and left screen bounds
         if (this.x <= 2 || this.x >= canvas.width - this.width) {
             this.motionX = -this.motionX;
         }
     
+        // add gravity if not grounded
         if( !this.onBottom() ){ // if not on platform
             this.motionY += GRAVITY;
         }
 
+        // reset parameters, this line needs to be here
         this.onPlatform = false;
 
         platforms.forEach((platform)=>{
@@ -107,15 +111,17 @@ class Block {
             }
         });
         
+        // increment speed
         this.x += this.motionX;
-
         this.y += this.motionY;
 
+        // block top bound
         if ( this.y <= 0 ) {
             this.motionY = 0;
             this.y = 0;
         }
 
+        //block bottom bound
         if ( this.onBottom() ) {
             this.motionY = 0;
             this.y = canvas.height - this.height;
