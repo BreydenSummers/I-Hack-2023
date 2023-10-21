@@ -15,14 +15,11 @@ input {
     margin-bottom: 3vh;
 }
 
-form {
-    margin-bottom: 13vh;
-}
-
 label {
     font-size: 2.5em;
     color: aliceblue;
     text-justify: newspaper;
+    margin-bottom: 1vh;
 }
 
 canvas{
@@ -50,9 +47,21 @@ form{
     z-index: 10;
 }
 
-canvas{
+#questionBox{
+    display: flex;
+    justify-content: center;
     position: absolute;
+    width: 100%;
+    height: 6vh;   
+    z-index: 5;
 }
+
+#question{
+    font-size: 2em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: aliceblue;
+}
+
 
 #titleScreen{
     position: absolute;
@@ -62,6 +71,7 @@ canvas{
     display: flex;
     flex-direction: column;
     align-items: center;
+    visibility: visible;
 }
 
 #titleScreen h1{
@@ -86,17 +96,14 @@ canvas{
     justify-content: center;
     display: none;
     align-items: center;
+    flex-direction: column;
   
 }
 #loading div{
     justify-content: center;
     font-size: 8em;
 }
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 /* The player buttons don't do anything useful at the moment but our button for start makes an API call to Chat GPT based on topic in the form */
 .buttons{
@@ -228,5 +235,22 @@ form{
 }
 
 #playerCount{
-    margin-bottom: 7vh;
+    margin-bottom: 3vh;
+}
+
+#spinner{
+    width: 10vh;
+    height: 10vh;
+    background-image: url("Images/spinner.png");
+    background-size: contain;
+    animation: anem 1s linear infinite;
+}
+
+@keyframes anem {
+    0%{
+        transform : rotate(0);
+    }
+    100%{
+        transform : rotate(360deg);
+    }
 }

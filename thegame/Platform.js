@@ -9,7 +9,7 @@ class Platform {
     draw() {
         ctx.beginPath();
         ctx.rect(this.x, this.y, this.width, this.height); 
-        ctx.fillStyle = "#ff5";
+        ctx.fillStyle = this.color;
         ctx.fill();
         ctx.closePath();
     }    
