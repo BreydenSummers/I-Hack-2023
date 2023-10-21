@@ -1,15 +1,73 @@
+class Block {
+    constructor() {
+        this.x = 50;
+        this.y = canvas.height/2;
+        this.width = 25;
+        this.height = 25;
+        this.jumpHeight = 75;
+        this.jumping = false;
+        this.jumpStartY = 0;
+        this.motionX = 4;
+        this.motionY = 0;
+    }
+
+    draw() {
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.width, this.height); 
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+    }
+
+    blockJump() {
+        if (upPressed && true) { // true should be on platform
+            this.motionY = -5;
+        }
+    }
+
+    // takes in a platform object as an argument. returns if block is on platform
+    blockOnPlatform(platform) {
+    if (this.x >= platform.x && this.x <= platform.x + platform.length) {
+        if ( this.y === platform.y - this.y ){
+            return true;
+        }
+        
+    }
+
+    return false;
+    }
+    update() {
+        this.blockJump();
+        if ( rightPressed && this.motionX < 0 || leftPressed && this.motionX > 0 ) {
+            this.motionX = -this.motionX;
+        }
+    
+        if (this.x <= 2 || this.x >= canvas.width - this.width) {
+            this.motionX = -this.motionX;
+        }
+    
+        this.x += this.motionX;
+
+        if(true){ // if not on platform
+            this.motionY += GRAVITY;
+        }
+
+        this.y += this.motionY;
+    }
+}
+
 let rightPressed;
 let leftPressed;
-let motionX = 2;
+let upPressed;
+const GRAVITY = 0.3;
 
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
 
-let blockWidth = 25;
-let blockX = (canvas.width-blockWidth)/2;
-
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+
+let player1 = new Block();
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -18,6 +76,10 @@ function keyDownHandler(e) {
     else if(e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = true;
     }
+    else if(e.key == "Up" || e.key == "ArrowUp") {
+        upPressed = true;
+    }
+    
 }
 
 function keyUpHandler(e) {
@@ -27,41 +89,24 @@ function keyUpHandler(e) {
     else if(e.key == "Left" || e.key == "ArrowLeft") {
         leftPressed = false;
     }
+    else if(e.key == "Up" || e.key == "ArrowUp") {
+        upPressed = false;
+    }
 }
 
-function updateBlock() {
-    if ( rightPressed && motionX < 0 || leftPressed && motionX > 0 ) {
-        motionX = -motionX;
-    }
-
-    if (blockX <= 2 || blockX >= canvas.width - blockWidth){
-        motionX = -motionX;
-    }
-
-    blockX += motionX;
-    
-}
 
 function updateGameData() {
     // update position and check for collision
-    updateBlock();
+    player1.update();
 }
 
 function drawLevel() {
     ctx.fillStyle = "lightblue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.fillRect(200, 200, 50, 50);
-    ctx.fillStyle = "brown";
-    ctx.fillRect(150, 250, 150, 150);
-}
-
-function drawBlock() {
-    ctx.beginPath();
-    ctx.rect(blockX, canvas.height/2, blockWidth, blockWidth);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
+    // ctx.fillStyle = "white";
+    // ctx.fillRect(200, 200, 50, 50);
+    // ctx.fillStyle = "brown";
+    // ctx.fillRect(150, 250, 150, 150);
 }
 
 function draw() {
@@ -71,17 +116,26 @@ function draw() {
     // players
     // On top of screen UI
     drawLevel();
-    drawBlock();
+    player1.draw();
 }
 
 function gameLoop() {
     // potentially pull from server for multiplayer data
     // update game data
-    updateGameData();
-    draw();
+    let gameRunning = false;
+    if (document.getElementById("titleScreen").style.visibility != true)
+    {
+        if(gameRunning == false)
+        {
+            document.getElementById("Title").remove();
+        }
+        updateGameData();
+        draw();
 
-    // draw
-    requestAnimationFrame(gameLoop);
+        // draw
+        requestAnimationFrame(gameLoop);
+    }
+    
 }
 
 function gameStart() {
@@ -91,3 +145,4 @@ function gameStart() {
 }
 
 gameStart();
+
