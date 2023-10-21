@@ -1,6 +1,7 @@
 
 var data;
 var running = false;   
+var questionPrint = false;
 
 let rightPressed;
 let leftPressed;
@@ -83,7 +84,14 @@ function draw() {
 
 function gameLoop() {
     if(running == true){
-        document.getElementById("titleScreen").style.visibility = "hidden"
+        document.getElementById("titleScreen").style.visibility = "hidden";
+        if(questionPrint == false){
+            const question = document.createElement("h1");
+            question.innerHTML = data['question'];
+            question.id = "question";
+            document.getElementById("questionBox").appendChild(question);
+            questionPrint = true;
+        }
         // potentially pull from server for multiplayer data
         // update game data
         updateGameData();
@@ -108,10 +116,10 @@ function bootstrapGame(form){
 
 function gameStart() {
     // load assets
- 
     // load levels and initiate characters
-    if(document.getElementById("titleScreen").style.visibility != "visible"){
+    if(document.getElementById("titleScreen").style.display != "none"){
         gameLoop();
+        console.log('rusd');
     }
     
 }
