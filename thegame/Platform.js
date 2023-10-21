@@ -1,5 +1,5 @@
 class Platform {
-    constructor(x, y, moveHorizontal=false, width=100, height=10,  moveVertical=false) {
+    constructor(x, y, width=100, height=10, moveHorizontal=false, moveVertical=false) {
         this.x = x;
         this.xOrigin = x;
         this.yOrigin = y;
