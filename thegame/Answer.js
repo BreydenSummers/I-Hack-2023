@@ -4,9 +4,10 @@ class Answer {
         this.y = y;
         this.width = 100;
         this.height = 100;
-        this.style = "rgba(0,0,255,0.2)"
-        this.text = text
-        this.correct = correct
+        this.style = "rgba(0,0,255,0.2)";
+        this.text = text;
+        this.correct = correct;
+        this.winning_player = null;
     }
     draw() {
         ctx.beginPath();
@@ -36,6 +37,7 @@ class Answer {
             ){
                 if(this.correct){
                     this.style = "rgba(0,255,0,0.4)"
+                    this.winning_player = player.name;
                 }else{
                     this.style = "rgba(255, 0,0,0.4)"
                 }

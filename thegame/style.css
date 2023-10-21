@@ -103,6 +103,30 @@ form{
     justify-content: center;
     font-size: 8em;
 }
+
+#winning {
+    position: absolute;
+    height: 80vh;
+    width: 80vw;
+    background-color: rgb(36, 36, 36);
+    display: none;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+  
+}
+#winning_player{
+    justify-content: center;
+    font-size: 8em;
+}
+#winning div{
+    justify-content: center;
+    font-size: 8em;
+}
+
 #questionDisplay {
     position: absolute;
     height: 80vh;

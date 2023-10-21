@@ -1,5 +1,5 @@
 class Block {
-    constructor(color) {
+    constructor(color, name) {
         this.x = 150;
         this.y = canvas.height/2;
         this.width = 25;
@@ -8,6 +8,7 @@ class Block {
         this.motionY = 0;
         this.onPlatform = false;
         this.color = color;
+        this.name = name;
     }
 
     draw() {

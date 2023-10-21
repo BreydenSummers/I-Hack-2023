@@ -4,6 +4,9 @@ var running = false;
 var loading = false;
 var questionTime = Date.now();
 var questionBool = false;
+var winning_player = null;
+var winning = false;
+var show_winning_time = Date.now();
 
 const FPS = 60;
 const FRAME_DURATION = 8 / FPS;
@@ -25,9 +28,9 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 let players = [];
-let player1 = new Block("#FF46F4");
+let player1 = new Block("#FF46F4", "Player 1");
 players.push(player1);
-let player2 = new Block("#0ff");
+let player2 = new Block("#0ff", "Player 2");
 players.push(player2);
 
 var mapNum = Math.floor(Math.random() * 2) + 1;
@@ -146,7 +149,11 @@ function updateGameData() {
         }
     )
     Answers.forEach((answer) => {
-        answer.update(players)
+        answer.update(players);
+        if (answer.winning_player) {
+            winning_player = answer.winning_player;
+            answer.winning_player = null;
+        }
     })
 
     gamePlatforms.forEach((platform)=>{
@@ -186,6 +193,11 @@ function draw() {
 let start = Date.now();
 let doLoop = true
 function gameLoop() {
+    if(winning == true) {
+        document.getElementById("winning").style.display = "flex";
+        const winner = document.getElementById("winning_player");
+        winner.innerHTML = winning_player + " wins!!!";
+    }
     if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "none";
@@ -206,6 +218,9 @@ function gameLoop() {
                 updateGameData();
                 draw();
                 console.log(data);
+                if(winning_player) {
+                    winning = true;
+                }
             }
         } else{
             if(questionBool == false){
@@ -223,10 +238,6 @@ function gameLoop() {
             questionBool = true;
             document.getElementById("questionDisplay").style.display = "flex";
             document.getElementById("questionTime").innerHTML = Math.round(5 - (Date.now() - questionTime) / 1000);
-
-
-
-
         }
 
         if(doLoop){
