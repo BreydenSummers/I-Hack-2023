@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
     <style>
         #gamescreen {
@@ -12,7 +13,38 @@
     </style>
 </head>
 <body>
-    <canvas id="gamescreen" width="700" height="500"></canvas>
+    
+    <div class="wrapper">
+        <div class="circle">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="container">
+        <canvas id="gamescreen"></canvas>
+        <div id="titleScreen">
+            <h1>AI RUNDOWN</h1>
+            <form action="" method="GET">
+                <label for="callai"> ..........................TOPIC.......................</label><br><br><br>
+                <input type="text" id="callai" name="callai" value="!!TYPE ANYTHING REALLY!!"><br><br>
+                <div id="playerCount">
+                    <input class="buttons" type="button" value="1 PLAYER">
+                    <input class="buttons" type="button" value="2 PLAYER">
+                    <input class="buttons" type="button" value="3 PLAYER">
+                    <input class="buttons" type="button" value="4 PLAYER">
+                </div>
+                <input class="buttons" type="button" value="Click" onclick="bootstrapGame(this.form)">
+            </form>
+            
+        </div>
+    </div>
     <script src="Block.js"></script>
     <script src="Platform.js"></script>
     <script src="gameplay.js"></script>

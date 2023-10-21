@@ -5,7 +5,7 @@ var running = false;
 let rightPressed;
 let leftPressed;
 let upPressed;
-const GRAVITY = 0.5;
+const GRAVITY = 0.6;
 
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
@@ -57,7 +57,7 @@ function updateGameData() {
 }
 
 function drawLevel() {
-    ctx.fillStyle = "lightblue";
+    ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     // ctx.fillStyle = "white";
     // ctx.fillRect(200, 200, 50, 50);
@@ -82,28 +82,38 @@ function draw() {
 }
 
 function gameLoop() {
-    // potentially pull from server for multiplayer data
-    // update game data
-    updateGameData();
-    draw();
-
-    // draw
-    requestAnimationFrame(gameLoop);
+    console.log("I am running")
     if(running == true){
-      console.log(data);
-    }
+        document.getElementById("titleScreen").style.display = "none"
+        // potentially pull from server for multiplayer data
+        // update game data
+        updateGameData();
+        draw();
+        // draw
+        console.log(data);
+   }
+   requestAnimationFrame(gameLoop);
+
 
 }
+function bootstrapGame(form){
+    console.log(form)
+    fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
+    .then(response => response.json())
+    .then(jsonData => data = jsonData)
+    .then(jsonData => console.log(jsonData))
+    .then(run => running = true);
+
+    // gameStart();
+}
+
 
 function gameStart() {
     // load assets
  
-    data = fetch("http://34.41.134.6:5000/getquestion/burgers")
-            .then(response => response.json())
-            .then(jsonData => data = jsonData)
-            .then(run => running = true);
     // load levels and initiate characters
     gameLoop();
+    
 }
 
 gameStart();

@@ -4,24 +4,22 @@ class Block {
         this.y = canvas.height/2;
         this.width = 25;
         this.height = 25;
-        this.jumpHeight = 75;
-        this.jumping = false;
-        this.jumpStartY = 0;
-        this.motionX = 3;
+        this.motionX = 7;
         this.motionY = 0;
+        this.color = "#FF46F4";
     }
 
     draw() {
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height); 
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
     }
 
     blockJump() {
         if ( upPressed && this.onBottom() ) { // true should be on platform
-            this.motionY = -7;
+            this.motionY = -10;
         }
     }
 
@@ -51,7 +49,7 @@ class Block {
             this.motionX = -this.motionX;
         }
     
-        if( true ){ // if not on platform
+        if( !this.onBottom() ){ // if not on platform
             this.motionY += GRAVITY;
         }
 
