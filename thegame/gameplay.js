@@ -30,6 +30,8 @@ let platforms = [];
 // platforms.push(platform1);
 // let platform2 = new Platform(300, 470, 100, 30);
 // platforms.push(platform2);
+let Answers = [];
+let AnswerPos = [[0,0], [0,0], [0,0], [0,0]];
 
 
 let game1Platforms = [
@@ -49,21 +51,15 @@ let game2Platforms = [
     new Platform(260, canvas.height-80, 100, 30),
     new Platform((canvas.width/2)+50, canvas.height - 80, 100, 30),
 
-    new Platform(140, 175, 100, 30),
-    new Platform(240, 150, 100, 30),
-    new Platform(340, 125, 100, 30),
-    new Platform(440, 150, 100, 30),
-    new Platform(540, 175, 100, 30),
+    new Platform(155, 175, 100, 30),
+    new Platform(255, 150, 100, 30),
+    new Platform(355, 125, 100, 30),
+    new Platform(455, 150, 100, 30),
+    new Platform(555, 175, 100, 30),
 ];
-
+AnswerPos = [[0, 30], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 30]];
 let game1 = new Map(game2Platforms);
 
-
-
-
-
-let Answers = [];
-let AnswerPos = [[400,400], [0,200], [500, 400], [200,200]]
 function setupAnswer(x, y, text, correct){
     let answer = new Answer(x,y, text, correct);
     Answers.push(answer);
