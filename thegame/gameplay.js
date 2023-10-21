@@ -1,15 +1,57 @@
+class Block {
+    constructor() {
+        this.x = 50;
+        this.y = canvas.height/2;
+        this.width = 25;
+        this.height = 25;
+        this.jumpHeight = 75;
+        this.jumping = false;
+        this.jumpStartY = 0;
+        this.motionX = 4;
+    }
+
+    draw() {
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.width, this.height); 
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+    }
+
+    // takes in a platform object as an argument. returns if block is on platform
+     blockOnPlatform(platform) {
+    if (this.x >= platform.x && this.x <= platform.x + platform.length) {
+        if ( this.y === platform.y - this.y ){
+            return true;
+        }
+        
+    }
+
+    return false;
+    }
+    update() {
+        if ( rightPressed && this.motionX < 0 || leftPressed && this.motionX > 0 ) {
+            this.motionX = -this.motionX;
+        }
+    
+        if (this.x <= 2 || this.x >= canvas.width - this.width) {
+            this.motionX = -this.motionX;
+        }
+    
+        this.x += this.motionX;
+    }
+}
+
 let rightPressed;
 let leftPressed;
-let motionX = 2;
 
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
 
-let blockWidth = 25;
-let blockX = (canvas.width-blockWidth)/2;
-
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+
+let player1 = new Block();
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -29,39 +71,24 @@ function keyUpHandler(e) {
     }
 }
 
-function updateBlock() {
-    if ( rightPressed && motionX < 0 || leftPressed && motionX > 0 ) {
-        motionX = -motionX;
-    }
-
-    if (blockX <= 2 || blockX >= canvas.width - blockWidth){
-        motionX = -motionX;
-    }
-
-    blockX += motionX;
-    
-}
 
 function updateGameData() {
     // update position and check for collision
-    updateBlock();
+    player1.update();
 }
 
 function drawLevel() {
     ctx.fillStyle = "lightblue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.fillRect(200, 200, 50, 50);
-    ctx.fillStyle = "brown";
-    ctx.fillRect(150, 250, 150, 150);
+    // ctx.fillStyle = "white";
+    // ctx.fillRect(200, 200, 50, 50);
+    // ctx.fillStyle = "brown";
+    // ctx.fillRect(150, 250, 150, 150);
 }
 
-function drawBlock() {
-    ctx.beginPath();
-    ctx.rect(blockX, canvas.height/2, blockWidth, blockWidth);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
+
+function blockJump() {
+
 }
 
 function draw() {
@@ -71,7 +98,7 @@ function draw() {
     // players
     // On top of screen UI
     drawLevel();
-    drawBlock();
+    player1.draw();
 }
 
 function gameLoop() {
@@ -91,3 +118,4 @@ function gameStart() {
 }
 
 gameStart();
+
