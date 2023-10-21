@@ -96,6 +96,7 @@ form{
     justify-content: center;
     display: none;
     align-items: center;
+    flex-direction: column;
   
 }
 #loading div{
@@ -235,4 +236,21 @@ form{
 
 #playerCount{
     margin-bottom: 3vh;
+}
+
+#spinner{
+    width: 10vh;
+    height: 10vh;
+    background-image: url("Images/spinner.png");
+    background-size: contain;
+    animation: anem 1s linear infinite;
+}
+
+@keyframes anem {
+    0%{
+        transform : rotate(0);
+    }
+    100%{
+        transform : rotate(360deg);
+    }
 }
