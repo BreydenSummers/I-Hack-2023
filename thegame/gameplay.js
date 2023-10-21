@@ -1,6 +1,7 @@
 
 var data;
 var running = false;   
+var loading = false;
 var questionPrint = false;
 
 let rightPressed;
@@ -83,8 +84,9 @@ function draw() {
 }
 
 function gameLoop() {
-    if(running == true){
-        document.getElementById("titleScreen").style.visibility = "hidden";
+    if(running == true && loading == false){
+        document.getElementById("titleScreen").style.display = "none"
+        document.getElementById("loading").style.display = "none";
         if(questionPrint == false){
             const question = document.createElement("h1");
             question.innerHTML = data['question'];
@@ -97,6 +99,11 @@ function gameLoop() {
         updateGameData();
         draw();
         console.log(data);
+   } else if(running == false && loading == true){
+        document.getElementById("titleScreen").style.display = "none"
+        document.getElementById("loading").style.display = "flex"
+
+
    }
    requestAnimationFrame(gameLoop);
 
@@ -104,13 +111,13 @@ function gameLoop() {
 }
 function bootstrapGame(form){
     console.log(form)
+    loading = true;
     fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
-    .then(run => running = true);
-
-    // gameStart();
+    .then(run => running = true)
+    .then(run2 => loading = false);
 }
 
 
