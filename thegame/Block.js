@@ -7,7 +7,7 @@ class Block {
         this.jumpHeight = 75;
         this.jumping = false;
         this.jumpStartY = 0;
-        this.motionX = 7;
+        this.motionX = 3;
         this.motionY = 0;
     }
 
@@ -56,24 +56,29 @@ class Block {
         }
 
         platforms.forEach((platform)=>{
-            if(
-                // move left
-                (
-                this.motionX < 0 &&
-                this.x + this.motionX < platform.x + platform.width &&
-                this.y + this.height + this.motionY > platform.y &&
-                this.y + this.motionY < platform.y + platform.height
-                )
-                ||
-                // move right
-                (
-                this.motionX > 0 &&
-                this.x + this.width + this.motionX > platform.x &&
-                this.y + this.height + this.motionY > platform.y &&
-                this.y + this.motionY < platform.y + platform.height
-                )
+            if (
+                    this.y + this.height + this.motionY > platform.y
+                &&  this.y + this.motionY < platform.y + platform.height
             ) {
-                this.motionX = -this.motionX
+                if (
+                    (
+                        //collide left
+                            this.motionX < 0
+                        &&  this.x + this.motionX < platform.x + platform.width
+                        //&&  !(this.x + this.motionX < platform.x)
+                    )
+                ) {
+                    this.motionX = -1 * Math.abs(this.motionX)
+                }
+                if (
+                    (
+                        //collide right
+                            this.motionX > 0
+                        &&  this.x + this.width + this.motionX > platform.x
+                    )
+                ) {
+                    this.motionX = -1 * Math.abs(this.motionX)
+                }
             }
         });
         
