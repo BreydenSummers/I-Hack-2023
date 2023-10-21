@@ -5,7 +5,7 @@ var running = false;
 let rightPressed;
 let leftPressed;
 let upPressed;
-const GRAVITY = 0.5;
+const GRAVITY = 0.6;
 
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
