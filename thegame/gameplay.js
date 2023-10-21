@@ -35,9 +35,13 @@ let platforms = [];
 let Answers = [];
 let AnswerPos = [[0,0], [0,0], [0,0], [0,0]];
 let gamePlatforms = [];
+let playerNum = 2;
+
 
 if (mapNum == 1){
     gamePlatforms = [
+        new Platform(canvas.width, 0, 50, canvas.height),
+        new Platform(-50, 0, 50, canvas.height),
         new Platform( canvas.width/2, canvas.height/2),
         new Platform(100, canvas.height-(canvas.height/6)),
         new Platform(300, canvas.height-(canvas.height/4))
@@ -45,6 +49,8 @@ if (mapNum == 1){
 }
 else if (mapNum == 2){
     gamePlatforms = [
+        new Platform(canvas.width, 0, 50, canvas.height),
+        new Platform(-50, 0, 50, canvas.height),
         new Platform(0, canvas.height-250, 100, 100),
         new Platform(0, canvas.height-25, 100, 100),
         new Platform(100, canvas.height-200, 100, 100),
@@ -64,7 +70,18 @@ else if (mapNum == 2){
     ];
     AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
 }
-
+else if (mapNum == 3){
+    gamePlatforms = [
+        new Platform(canvas.width, 0, 50, canvas.height),
+        new Platform(-50, 0, 50, canvas.height),
+        new Platform(155, 200, 100, 30),
+        new Platform(255, 175, 100, 30),
+        new Platform(355, 150, 100, 30),
+        new Platform(455, 175, 100, 30),
+        new Platform(555, 200, 100, 30)
+    ];
+    AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
+}
 
 
 let game1 = new Map(gamePlatforms);
@@ -74,6 +91,9 @@ function setupAnswer(x, y, text, correct){
     Answers.push(answer);
 }
 
+function setupPlayers(num){
+    playerNum = num
+}
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -196,7 +216,6 @@ function gameLoop() {
                 // update game data
                 updateGameData();
                 draw();
-                console.log(data);
             }
         } else{
             if(questionBool == false){
@@ -225,7 +244,6 @@ function gameLoop() {
             // update game data
             updateGameData();
             draw();
-            console.log(data);
         }
    } else if(running == false && loading == true){
         document.getElementById("titleScreen").style.display = "none"
@@ -246,7 +264,6 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 function bootstrapGame(form){
-    console.log(form)
     loading = true;
     fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
     .then(response => response.json())
@@ -261,12 +278,14 @@ function bootstrapGame(form){
         answer2 = data["answers"]["B"];
         answer3 = data["answers"]["C"];
         answer4 = data["answers"]["D"];
-        console.log(AnswerPos[0][0])
         setupAnswer(AnswerPos[0][0],AnswerPos[0][1],answer1, "A" == data["solution"]);
         setupAnswer(AnswerPos[1][0],AnswerPos[1][1],answer2, "B" == data["solution"]);
         setupAnswer(AnswerPos[2][0],AnswerPos[2][1],answer3, "C" == data["solution"]);
         setupAnswer(AnswerPos[3][0],AnswerPos[3][1],answer4, "D" == data["solution"]);
-    });
+    })
+    .then(run4 => {if(playerNum == 1){
+        player2.x = 100000000000;
+}});
 }
 
 
@@ -275,7 +294,6 @@ function gameStart() {
     // load levels and initiate characters
     if(document.getElementById("titleScreen").style.display != "none"){
         gameLoop();
-        console.log('rusd');
     }
     
 }
