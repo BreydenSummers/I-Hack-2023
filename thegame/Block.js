@@ -6,6 +6,7 @@ class Block {
         this.height = 25;
         this.motionX = 7;
         this.motionY = 0;
+        this.onPlatform = false;
         this.color = "#FF46F4";
     }
 
@@ -18,7 +19,7 @@ class Block {
     }
 
     blockJump() {
-        if ( upPressed && this.onBottom() ) { // true should be on platform
+        if ( upPressed && (this.onBottom() || this.onPlatform)) { // true should be on platform
             this.motionY = -10;
         }
     }
@@ -48,11 +49,78 @@ class Block {
             this.motionX = -this.motionX;
         }
     
+<<<<<<< Updated upstream
         this.x += this.motionX;
 
         if( !this.onBottom() ){ // if not on platform
             this.motionY += GRAVITY;
         }
+=======
+        if( !this.onBottom() && !this.onPlatform ){ // if not on platform
+            this.motionY += GRAVITY;
+        }
+
+        platforms.forEach((platform)=>{
+            if (
+                    this.y + this.height + this.motionY > platform.y
+                &&  this.y + this.motionY < platform.y + platform.height
+            ) {
+                if (
+                    (
+                        //collide right
+                            this.motionX > 0
+                            &&  this.x + this.width + this.motionX > platform.x
+                            &&  this.x + this.width < platform.x
+                            && !(this.x + this.motionX > platform.x + platform.width )
+                            )
+                            ) {
+                                this.motionX = -1 * Math.abs(this.motionX);
+                                this.x = platform.x - this.width - 1;
+                            }
+                if (
+                    (
+                        //collide left
+                            this.motionX < 0
+                            &&  this.x + this.motionX <= platform.x + platform.width
+                            &&  this.x >= platform.x + platform.width
+                            //&&  !(this.x + this.width + this.motionX < platform.x)
+                    )
+                ) {
+                    this.motionX = 1 * Math.abs(this.motionX);
+                    this.x = platform.x + platform.width + 1;
+                }
+            }
+
+            //
+            if (
+                this.x + this.width + this.motionX > platform.x
+            &&  this.x + this.motionX < platform.x + platform.width
+            ) {
+                //hits bottom
+                if (
+                    this.y + this.height + this.motionY > platform.y
+                &&  this.y + this.height < platform.y
+                ) {
+                    this.onPlatform = true;
+                    console.log(this.onPlatform);
+                    this.motionY = 0;
+                    this.y = platform.y - this.height - 1;
+                    
+                }
+                else { 
+                    this.onPlatform = false;
+                }
+                // hits top
+                if (
+                    this.y + this.height + this.motionY > platform.y
+                &&  this.y + this.height < platform.y
+                ) {
+                    this.motionY = 0;
+                    this.y = platform.y - this.height - 1;
+                }
+            }
+        });
+>>>>>>> Stashed changes
         
         this.y += this.motionY;
 
