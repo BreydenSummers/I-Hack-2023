@@ -74,9 +74,10 @@ function gameLoop() {
         updateGameData();
         draw();
         // draw
-        requestAnimationFrame(gameLoop);
         console.log(data);
    }
+   requestAnimationFrame(gameLoop);
+
 
 }
 function bootstrapGame(form){
@@ -85,8 +86,7 @@ function bootstrapGame(form){
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
-    .then(run => running = true)
-    .then(gameStart());
+    .then(run => running = true);
 
     // gameStart();
 }
@@ -99,6 +99,7 @@ function gameStart() {
     gameLoop();
     
 }
-gameLoop();
+
+gameStart();
 
 
