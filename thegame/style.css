@@ -15,14 +15,11 @@ input {
     margin-bottom: 3vh;
 }
 
-form {
-    margin-bottom: 13vh;
-}
-
 label {
     font-size: 2.5em;
     color: aliceblue;
     text-justify: newspaper;
+    margin-bottom: 1vh;
 }
 
 canvas{
@@ -48,10 +45,6 @@ form{
     align-items: center;
     margin: 0 auto;
     z-index: 10;
-}
-
-canvas{
-    position: absolute;
 }
 
 #questionBox{
@@ -109,11 +102,7 @@ canvas{
     justify-content: center;
     font-size: 8em;
 }
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 /* The player buttons don't do anything useful at the moment but our button for start makes an API call to Chat GPT based on topic in the form */
 .buttons{
@@ -245,5 +234,5 @@ form{
 }
 
 #playerCount{
-    margin-bottom: 7vh;
+    margin-bottom: 3vh;
 }
