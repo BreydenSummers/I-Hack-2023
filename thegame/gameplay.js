@@ -41,16 +41,16 @@ let gamePlatforms = [];
 let playerNum = 2;
 
 
-if (mapNum == 1){
-    gamePlatforms = [
-        new Platform(canvas.width, 0, 50, canvas.height),
-        new Platform(-50, 0, 50, canvas.height),
-        new Platform( canvas.width/2, canvas.height/2),
-        new Platform(100, canvas.height-(canvas.height/6)),
-        new Platform(300, canvas.height-(canvas.height/4))
-    ];
-}
-else if (mapNum == 2){
+// if (mapNum == 1){
+//     gamePlatforms = [
+//         new Platform(canvas.width, 0, 50, canvas.height),
+//         new Platform(-50, 0, 50, canvas.height),
+//         new Platform( canvas.width/2, canvas.height/2),
+//         new Platform(100, canvas.height-(canvas.height/6)),
+//         new Platform(300, canvas.height-(canvas.height/4))
+//     ];
+// }
+// if (mapNum == 1){
     gamePlatforms = [
         new Platform(canvas.width, 0, 50, canvas.height),
         new Platform(-50, 0, 50, canvas.height),
@@ -72,19 +72,19 @@ else if (mapNum == 2){
         new Platform(555, 200, 100, 30)
     ];
     AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
-}
-else if (mapNum == 3){
-    gamePlatforms = [
-        new Platform(canvas.width, 0, 50, canvas.height),
-        new Platform(-50, 0, 50, canvas.height),
-        new Platform(155, 200, 100, 30),
-        new Platform(255, 175, 100, 30),
-        new Platform(355, 150, 100, 30),
-        new Platform(455, 175, 100, 30),
-        new Platform(555, 200, 100, 30)
-    ];
-    AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
-}
+// }
+// else if (mapNum == 2){
+//     gamePlatforms = [
+//         new Platform(canvas.width, 0, 50, canvas.height),
+//         new Platform(-50, 0, 50, canvas.height),
+//         new Platform(155, 200, 100, 30),
+//         new Platform(255, 175, 100, 30),
+//         new Platform(355, 150, 100, 30),
+//         new Platform(455, 175, 100, 30),
+//         new Platform(555, 200, 100, 30)
+//     ];
+//     AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
+// }
 
 
 let game1 = new Map(gamePlatforms);
