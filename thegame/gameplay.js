@@ -2,6 +2,8 @@
 var data;
 var running = false;   
 var loading = false;
+var questionTime = Date.now();
+var questionBool = false;
 
 const FPS = 60;
 const FRAME_DURATION = 8 / FPS;
@@ -35,6 +37,8 @@ let platforms = [];
 // platforms.push(platform1);
 // let platform2 = new Platform(300, 470, 100, 30);
 // platforms.push(platform2);
+let Answers = [];
+let AnswerPos = [[0,0], [0,0], [0,0], [0,0]];
 
 
 let game1Platforms = [
@@ -43,7 +47,7 @@ let game1Platforms = [
     new Platform(300, canvas.height-(canvas.height/4))
 ];
 let game2Platforms = [
-    new Platform(0, canvas.height-250, 100, 100),
+    new Platform(0, canvas.height-250, 100, 100, ),
     new Platform(0, canvas.height-25, 100, 100),
     new Platform(100, canvas.height-200, 100, 100),
     new Platform(200, canvas.height-150, 100, 100),
@@ -54,17 +58,15 @@ let game2Platforms = [
     new Platform(260, canvas.height-80, 100, 30),
     new Platform((canvas.width/2)+50, canvas.height - 80, 100, 30),
 
-    new Platform(140, 175, 100, 30),
-    new Platform(240, 150, 100, 30),
-    new Platform(340, 125, 100, 30),
-    new Platform(440, 150, 100, 30),
-    new Platform(540, 175, 100, 30),
+    new Platform(155, 200, 100, 30),
+    new Platform(255, 175, 100, 30),
+    new Platform(355, 150, 100, 30),
+    new Platform(455, 175, 100, 30),
+    new Platform(555, 200, 100, 30)
 ];
-
+AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
 let game1 = new Map(game2Platforms);
 
-let Answers = [];
-let AnswerPos = [[400,400], [0,200], [500, 400], [200,200]]
 function setupAnswer(x, y, text, correct){
     let answer = new Answer(x,y, text, correct);
     Answers.push(answer);
@@ -173,12 +175,44 @@ function gameLoop() {
     if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "none";
-        if(questionPrint == false){
-            const question = document.createElement("h1");
-            question.innerHTML = data['question'];
-            question.id = "question";
-            document.getElementById("questionBox").appendChild(question);
-            questionPrint = true;
+        document.getElementById("questionDisplay").style.display = "none";
+
+        if(Date.now() - questionTime > 5000){
+            if(questionPrint == false){
+                const question = document.createElement("h1");
+                question.innerHTML = data['question'];
+                question.id = "question";
+                document.getElementById("questionBox").appendChild(question);
+                questionPrint = true;
+            }
+    
+            if(current_frame_duration === 0){
+                // potentially pull from server for multiplayer data
+                // update game data
+                updateGameData();
+                draw();
+                console.log(data);
+            }
+        } else{
+            if(questionBool == false){
+                const question = document.createElement("h1");
+                question.innerHTML = data['question'];
+                question.id = "questionloading";
+                document.getElementById("questionDisplay").appendChild(question);
+
+                const div = document.createElement("div");
+                div.innerHTML = 5 - (Date.now() - questionTime) / 1000;
+                div.id = "questionTime";
+                document.getElementById("questionDisplay").appendChild(div);
+
+            }
+            questionBool = true;
+            document.getElementById("questionDisplay").style.display = "flex";
+            document.getElementById("questionTime").innerHTML = Math.round(5 - (Date.now() - questionTime) / 1000);
+
+
+
+
         }
 
         if(doLoop){
@@ -213,7 +247,8 @@ function bootstrapGame(form){
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
-    .then(run => running = true)
+    .then(run0 => questionTime = Date.now())
+    .then(run1 => running = true)
     .then(run2 => loading = false)
     .then(run3 => {
 

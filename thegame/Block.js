@@ -4,7 +4,7 @@ class Block {
         this.y = canvas.height/2;
         this.width = 25;
         this.height = 25;
-        this.motionX = 5;
+        this.motionX = 1.9;
         this.motionY = 0;
         this.onPlatform = false;
         this.color = color;

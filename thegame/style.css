@@ -103,6 +103,23 @@ form{
     justify-content: center;
     font-size: 8em;
 }
+#questionDisplay {
+    position: absolute;
+    height: 80vh;
+    width: 80vw;
+    background-color: rgb(36, 36, 36);
+    display: none;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    font-size: 10vh;
+}
+#questionDisplay h1 {
+    font-size: 10vh;
+}
 
 
 /* The player buttons don't do anything useful at the moment but our button for start makes an API call to Chat GPT based on topic in the form */
