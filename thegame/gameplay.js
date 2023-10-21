@@ -1,3 +1,6 @@
+var data;
+var running = false;   
+
 class Block {
     constructor() {
         this.x = 50;
@@ -109,10 +112,19 @@ function gameLoop() {
 
     // draw
     requestAnimationFrame(gameLoop);
+    if(running == true){
+      console.log(data);
+    }
+
 }
 
 function gameStart() {
     // load assets
+ 
+    data = fetch("http://34.41.134.6:5000/getquestion/burgers")
+            .then(response => response.json())
+            .then(jsonData => data = jsonData)
+            .then(run => running = true);
     // load levels and initiate characters
     gameLoop();
 }
