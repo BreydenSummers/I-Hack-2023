@@ -1,10 +1,16 @@
 class Platform {
-    constructor() {
-        this.x = 0;
-        this.y = 0;
-        this.width = 20;
-        this.height = 5;
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
-}
 
-export default Platform;
+    draw() {
+        ctx.beginPath();
+        ctx.rect(this.x, this.y, this.width, this.height); 
+        ctx.fillStyle = "#ff5";
+        ctx.fill();
+        ctx.closePath();
+    }    
+}
