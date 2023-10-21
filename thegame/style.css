@@ -1,0 +1,98 @@
+body {
+    background-color: darkgray;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container { 
+    position: relative;
+    height: 90vh;
+    border: 20px black;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    z-index: 10;
+}
+
+.wrapper{
+    z-index: 2;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, rgb(189, 60, 9) 0%, rgb(0, 0, 0) 35%, rgb(107, 0, 122) 70%);
+}
+
+.circle div{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    background-image: url("Images/Ghost.png");
+    background-size:contain;
+}
+
+.circle div:nth-child(1){
+    top: 27%;
+    left: 2%;
+    animation: animate 10s linear infinite;
+}
+.circle div:nth-child(2){
+    top: 2%;
+    left: 4%;
+    animation: animate 9s linear infinite;
+}
+.circle div:nth-child(3){
+    top: 80%;
+    left: 3%;
+    animation: animate 19s linear infinite;
+}
+.circle div:nth-child(4){
+    top: 38%;
+    left: 96%;
+    animation: animate 13s linear infinite;
+}
+.circle div:nth-child(5){
+    top: 5%;
+    left: 100%;
+    animation: animate 6s linear infinite;
+}
+.circle div:nth-child(6){
+    top: 99%;
+    left: 90%;
+    animation: animate 15s linear infinite;
+}
+.circle div:nth-child(7){
+    top: 98%;
+    left: 12%;
+    animation: animate 13s linear infinite;
+}
+.circle div:nth-child(8){
+    top: 95%;
+    left: 40%;
+    animation: animate 6s linear infinite;
+}
+.circle div:nth-child(9){
+    top: 88%;
+    left: 70%;
+    animation: animate 15s linear infinite;
+}
+
+@keyframes animate {
+    0%{
+        transform: scale(0) translateY(0) translateX(12, 34) rotate(0);
+        opacity: 0;
+    }
+    50%{
+        transform: scale(1.3) translateY(-100px) rotate(20deg);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(1) translateY(-200px) rotate(-20deg);
+        opacity: 0;
+    }
+}

@@ -68,8 +68,15 @@ function draw() {
 function gameLoop() {
     // potentially pull from server for multiplayer data
     // update game data
-    updateGameData();
-    draw();
+    let gameRunning = false;
+    if (document.getElementById("titleScreen").style.visibility != true)
+    {
+        if(gameRunning == false)
+        {
+            document.getElementById("Title").remove();
+        }
+        updateGameData();
+        draw();
 
     // draw
     requestAnimationFrame(gameLoop);
