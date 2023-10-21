@@ -28,8 +28,22 @@ function keyUpHandler(e) {
     }
 }
 
+function updateGameData() {
+    // update position and check for collision
+    
+}
+
+function draw() {
+    // draw in order of
+    // background
+    // ground and obstacles
+    // players
+    // On top of screen UI
+
+}
+
 function gameLoop() {
-    // potentially pull from server for multiplayer info
+    // potentially pull from server for multiplayer data
     // update game data
     // draw
     requestAnimationFrame(gameLoop);
