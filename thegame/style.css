@@ -5,7 +5,6 @@ body {
     overflow: hidden;
 }
 
-
 .container { 
     position: relative;
     height: 100%;
@@ -18,14 +17,69 @@ body {
     z-index: 10;
 }
 
-
-
 #titleScreen{
     position: absolute;
     height: 600px;
     width: 1200px;
-    background-color: aquamarine;
-    
+    background-color: rgb(36, 36, 36);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#titleScreen h1{
+    color: aliceblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-stretch: expanded;
+    font-size: 155px;
+    margin: 0px;
+    margin-bottom: 80px;
+    text-decoration: underline wavy orange;
+
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons{
+    width: 200px;
+    height: 60px;
+    font-size: 30px;
+    color: whitesmoke;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-weight: 900;
+    outline: 3px rgb(160, 1, 213) solid;
+    background: linear-gradient(rgb(149, 11, 144), rgba(255, 255, 255, 0));
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input{
+    width: 600px;
+    height: auto;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+form{
+    margin-bottom: 40px;
+}
+
+label{
+    font-size: 40px;
+    color: aliceblue;
+    text-justify: newspaper;
+}
+
+#playerCount{
+    margin-bottom: 60px;
 }
 
 .wrapper{
