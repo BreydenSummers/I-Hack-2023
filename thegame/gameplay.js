@@ -35,6 +35,8 @@ let platforms = [];
 let Answers = [];
 let AnswerPos = [[0,0], [0,0], [0,0], [0,0]];
 let gamePlatforms = [];
+let playerNum = 2;
+
 
 if (mapNum == 1){
     gamePlatforms = [
@@ -89,6 +91,9 @@ function setupAnswer(x, y, text, correct){
     Answers.push(answer);
 }
 
+function setupPlayers(num){
+    playerNum = num
+}
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -277,7 +282,10 @@ function bootstrapGame(form){
         setupAnswer(AnswerPos[1][0],AnswerPos[1][1],answer2, "B" == data["solution"]);
         setupAnswer(AnswerPos[2][0],AnswerPos[2][1],answer3, "C" == data["solution"]);
         setupAnswer(AnswerPos[3][0],AnswerPos[3][1],answer4, "D" == data["solution"]);
-    });
+    })
+    .then(run4 => {if(playerNum == 1){
+        player2.x = 100000000000;
+}});
 }
 
 

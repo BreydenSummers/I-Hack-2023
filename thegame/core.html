@@ -38,10 +38,8 @@
                 <label for="callai"> ..........................TOPIC.......................</label><br><br><br>
                 <input type="text" id="callai" name="callai" value="!!TYPE ANYTHING REALLY!!"><br><br>
                 <div id="playerCount">
-                    <input class="buttons" type="button" value="1 PLAYER">
-                    <input class="buttons" type="button" value="2 PLAYER">
-                    <input class="buttons" type="button" value="3 PLAYER">
-                    <input class="buttons" type="button" value="4 PLAYER">
+                    <input class="buttons" type="button" value="1 PLAYER" onclick="setupPlayers(1)">
+                    <input class="buttons" type="button" value="2 PLAYER" onclick="setupPlayers(2)">
                 </div>
                 <input class="buttons" id="start" type="button" value="START" onclick="bootstrapGame(this.form)">
             </form>
