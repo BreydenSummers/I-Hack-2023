@@ -2,9 +2,6 @@ let rightPressed;
 let leftPressed;
 let motionDirection = 1;
 
-
-
-
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
 ctx.fillStyle = "lightblue";
@@ -38,6 +35,11 @@ function keyUpHandler(e) {
     }
 }
 
+function updateGameData() {
+    // update position and check for collision
+    
+}
+
 function drawBlock() {
     
     ctx.beginPath();
@@ -45,10 +47,15 @@ function drawBlock() {
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
-    
 }
 
 function draw() {
+    // draw in order of
+    // background
+    // ground and obstacles
+    // players
+    // On top of screen UI
+
     drawBlock();
     if (rightPressed) {
        blockX += 7;
@@ -59,9 +66,8 @@ function draw() {
     }
 }
 
-draw();
 function gameLoop() {
-    // potentially pull from server for multiplayer info
+    // potentially pull from server for multiplayer data
     // update game data
     // draw
     requestAnimationFrame(gameLoop);
@@ -74,5 +80,3 @@ function gameStart() {
 }
 
 gameStart();
-
-
