@@ -64,6 +64,11 @@ let game2Platforms = [
     new Platform(455, 175, 100, 30),
     new Platform(555, 200, 100, 30)
 ];
+
+let game3Platforms = [
+    new Platform(canvas.width/2 - 10, canvas.height/2 - 10, 5, 5)
+]
+
 AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
 let game1 = new Map(game2Platforms);
 
