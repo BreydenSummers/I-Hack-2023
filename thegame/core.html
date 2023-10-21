@@ -13,19 +13,7 @@
     </style>
 </head>
 <body>
-    <div id="titleScreen">
-        <h1>AI RUNDOWN</h1>
-        <form action="/CALLINFO">
-            <label for="callai">State your Query</label>
-        </form>
-        <div id="playerCount">
-            <button>Enter Game</button>
-            <button>Enter Game</button>
-            <button>Enter Game</button>
-            <button>Enter Game</button>
-        </div>
-        <button>Enter Game</button>
-    </div>
+    
     <div class="wrapper">
         <div class="circle">
             <div></div>
@@ -41,6 +29,20 @@
     </div>
     <div class="container">
         <canvas id="gamescreen" width="1200" height="600"></canvas>
+        <div id="titleScreen">
+            <h1>AI RUNDOWN</h1>
+            <form action="/CALLINFO">
+                <label for="callai">State your Query</label><br>
+                <input type="text" id="callai" name="callai"><br><br>
+            </form>
+            <div id="playerCount">
+                <button>Enter Game</button>
+                <button>Enter Game</button>
+                <button>Enter Game</button>
+                <button>Enter Game</button>
+            </div>
+            <button>Enter Game</button>
+        </div>
     </div>
     
     <script src="gameplay.js"></script>

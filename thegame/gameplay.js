@@ -122,26 +122,22 @@ function draw() {
 function gameLoop() {
     // potentially pull from server for multiplayer data
     // update game data
-    let gameRunning = false;
-    if (document.getElementById("titleScreen").style.visibility != true)
-    {
-        if(gameRunning == false)
-        {
-            document.getElementById("Title").remove();
-        }
-        updateGameData();
-        draw();
+    updateGameData();
+    draw();
 
         // draw
-        requestAnimationFrame(gameLoop);
-    }
+    requestAnimationFrame(gameLoop);
+
     
 }
 
 function gameStart() {
     // load assets
     // load levels and initiate characters
-    gameLoop();
+    if(document.getElementById("titleScreen").style.visibility == "visible"){
+        gameLoop();
+    }
+    
 }
 
 gameStart();

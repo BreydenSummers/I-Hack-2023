@@ -5,6 +5,13 @@ body {
     overflow: hidden;
 }
 
+#titleScreen{
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-color: aquamarine;
+}
+
 .container { 
     position: relative;
     height: 90vh;
