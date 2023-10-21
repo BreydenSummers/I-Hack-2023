@@ -37,8 +37,8 @@ let AnswerPos = [[0,0], [0,0], [0,0], [0,0]];
 
 
 let game1Platforms = [
-    new Platform( canvas.width/2, canvas.height/2),
-    new Platform(100, canvas.height-(canvas.height/6)),
+    new Platform( canvas.width/4, canvas.height * 0.85, moveHorizontal=true),
+    new Platform(0, 0),
     new Platform(300, canvas.height-(canvas.height/4))
 ];
 let game2Platforms = [
@@ -98,9 +98,9 @@ function updateGameData() {
     players.forEach((player)=>{
         player.update(game1.platforms)
     });
-    Answers.forEach((answer) => {
-        answer.update(players)
-    })
+    game1Platforms.forEach((platform)=>{
+        platform.update()
+    });
 
 }
 

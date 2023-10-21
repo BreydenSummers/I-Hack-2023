@@ -1,10 +1,17 @@
 class Platform {
-    constructor(x, y, width=100, height=10, color='#ff5') {
+    constructor(x, y, moveHorizontal=false, width=100, height=10,  moveVertical=false) {
         this.x = x;
+        this.xOrigin = x;
+        this.yOrigin = y;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = color;
+        this.color = "#ff5"
+        this.movementRange = 50;
+        this.moveHorizontal  = moveHorizontal;
+        this.moveVertical = moveVertical;
+        this.dx = 1;
+
     }
 
     draw() {
@@ -14,4 +21,26 @@ class Platform {
         ctx.fill();
         ctx.closePath();
     }    
+
+    update() {
+        if ( this.moveHorizontal ){
+            
+            if ( this.dx > 0 && this.x + this.dx >= this.xOrigin + this.movementRange){
+                this.dx = -this.dx;
+            }
+            else if (this.dx < 0 && this.x + this.dx <= this.xOrigin - this.movementRange) {
+                this.dx = -this.dx;
+            }
+            this.x += this.dx;
+        }
+    //     if ( this.moving ){
+    //         if ( this.moveHorizontal ) {
+    //             if (this.x + this.dx  <= this.xOrigin + this.movementRange) {
+    //                 this.dx = -this.dx; 
+    //             }
+    //             this.x += this.dx;
+    //         }
+    //     }
+    // }
+    }
 }
