@@ -31,9 +31,10 @@
         <canvas id="gamescreen" width="1200" height="600"></canvas>
         <div id="titleScreen">
             <h1>AI RUNDOWN</h1>
-            <form action="/CALLINFO">
+            <form action="" method="GET">
                 <label for="callai">State your Query</label><br>
                 <input type="text" id="callai" name="callai"><br><br>
+                <input type="button" value="Click" onclick="bootstrapGame(this.form)">
             </form>
             <div id="playerCount">
                 <button>1 PLAYER</button>
@@ -41,10 +42,10 @@
                 <button>3 PLAYER</button>
                 <button>4 PLAYER</button>
             </div>
-            <button>Enter Game</button>
         </div>
     </div>
-    
+    <script src="Block.js"></script>
+    <!-- <script src="Platform.js"></script> -->
     <script src="gameplay.js"></script>
 </body>
 </html>

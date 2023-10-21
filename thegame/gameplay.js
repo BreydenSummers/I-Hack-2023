@@ -78,14 +78,22 @@ function gameLoop() {
     }
 
 }
+function bootstrapGame(form){
+    console.log(form)
+    fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
+    .then(response => response.json())
+    .then(jsonData => data = jsonData)
+    .then(jsonData => console.log(jsonData))
+    .then(run => running = true);
+
+    gameStart();
+}
+
 
 function gameStart() {
     // load assets
  
-    data = fetch("http://34.41.134.6:5000/getquestion/burgers")
-            .then(response => response.json())
-            .then(jsonData => data = jsonData)
-            .then(run => running = true);
+    
     // load levels and initiate characters
     if(document.getElementById("titleScreen").style.visibility == "visible"){
         gameLoop();
@@ -93,5 +101,4 @@ function gameStart() {
     
 }
 
-gameStart();
 
