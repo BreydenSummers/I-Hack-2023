@@ -66,7 +66,6 @@ function draw() {
 }
 
 function gameLoop() {
-    console.log("I am running")
     if(running == true){
         document.getElementById("titleScreen").style.visibility = "hidden"
         // potentially pull from server for multiplayer data
@@ -74,7 +73,6 @@ function gameLoop() {
         updateGameData();
         draw();
         // draw
-        console.log(data);
    }
    requestAnimationFrame(gameLoop);
 

@@ -7,6 +7,36 @@ body {
     overflow: hidden;
 }
 
+input {
+    width: 100vh;
+    height: 6vh;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 3vh;
+}
+
+form {
+    margin-bottom: 13vh;
+}
+
+label {
+    font-size: 2.5em;
+    color: aliceblue;
+    text-justify: newspaper;
+}
+
+canvas{
+    position: absolute;
+    height: 80vh;
+    width: 80vw;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .container { 
     position: absolute;
     height: 100%;
@@ -20,40 +50,7 @@ body {
     z-index: 10;
 }
 
-canvas{
-    position: absolute;
-    height: 80vh;
-    width: 80vw;
-}
-
-#titleScreen{
-    position: absolute;
-    height: 80vh;
-    width: 80vw;
-    background-color: rgb(36, 36, 36);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    visibility: visible;
-}
-
-#titleScreen h1{
-    color: aliceblue;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-style: italic;
-    font-stretch: expanded;
-    font-size: 9em;
-    margin: 0px;
-    margin-bottom: 8vh;
-    text-decoration: underline wavy orange;
-}
-
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* The player buttons don't do anything useful at the moment but our button for start makes an API call to Chat GPT based on topic in the form */
 .buttons{
     width: 15vw;
     height: 8vh;
@@ -69,43 +66,16 @@ form{
     margin-right: .5vw;
 }
 
-input{
-    width: 75%;
-    height: auto;
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 3vh;
+.buttons:hover{
+    width: 18vw;
+    height: 10vh;
 }
 
-form{
-    margin-bottom: 13vh;
+.buttons:active{
+    background: linear-gradient(rgb(255, 111, 0), rgba(255, 255, 255, 0));
+    outline: .5vh rgb(213, 89, 1) solid;
 }
-
-label{
-    font-size: 2.5em;
-    color: aliceblue;
-    text-justify: newspaper;
-}
-
-#playerCount{
-    margin-bottom: 7vh;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* The classes below are handling the background wrapping container for our floating ghosts that were originally ghosts*/
 .wrapper{
     z-index: 2;
     position: fixed;
@@ -117,7 +87,7 @@ label{
     background: linear-gradient(90deg, rgb(189, 60, 9) 0%, rgb(0, 0, 0) 35%, rgb(107, 0, 122) 70%);
 }
 
-
+/* For all the circles we are going to make them 10 percent of the viewport with a given image */
 .circle div{
     position: absolute;
     height: 10vh;
@@ -185,4 +155,30 @@ label{
         transform: scale(1) translateY(-20vh) rotate(-20deg);
         opacity: 0;
     }
+}
+
+#titleScreen{
+    position: absolute;
+    height: 80vh;
+    width: 80vw;
+    background-color: rgb(36, 36, 36);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: visible;
+}
+
+#titleScreen h1{
+    color: aliceblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-stretch: expanded;
+    font-size: 9em;
+    margin: 0px;
+    margin-bottom: 8vh;
+    text-decoration: underline wavy orange;
+}
+
+#playerCount{
+    margin-bottom: 7vh;
 }
