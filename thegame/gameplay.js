@@ -6,6 +6,7 @@ var loading = false;
 const FPS = 60;
 const FRAME_DURATION = 8 / FPS;
 let current_frame_duration = 0;
+var questionPrint = false;
 
 let rightPressed;
 let leftPressed;
@@ -105,7 +106,14 @@ function gameLoop() {
     let start = Date.now();
     if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
-        document.getElementById("loading").style.display = "none"
+        document.getElementById("loading").style.display = "none";
+        if(questionPrint == false){
+            const question = document.createElement("h1");
+            question.innerHTML = data['question'];
+            question.id = "question";
+            document.getElementById("questionBox").appendChild(question);
+            questionPrint = true;
+        }
 
         if(current_frame_duration === 0){
             // potentially pull from server for multiplayer data
@@ -141,10 +149,10 @@ function bootstrapGame(form){
 
 function gameStart() {
     // load assets
- 
     // load levels and initiate characters
-    if(document.getElementById("titleScreen").style.visibility != "visible"){
+    if(document.getElementById("titleScreen").style.display != "none"){
         gameLoop();
+        console.log('rusd');
     }
     
 }
