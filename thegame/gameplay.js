@@ -131,8 +131,9 @@ function draw() {
 
 }
 
+let start = Date.now();
+let doLoop = true
 function gameLoop() {
-    let start = Date.now();
     if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "none";
@@ -144,7 +145,7 @@ function gameLoop() {
             questionPrint = true;
         }
 
-        if(current_frame_duration === 0){
+        if(doLoop){
             // potentially pull from server for multiplayer data
             // update game data
             updateGameData();
@@ -157,10 +158,15 @@ function gameLoop() {
 
 
     }
-    current_frame_duration += Date.now() - start;
-    if (current_frame_duration > FRAME_DURATION) {
-        current_frame_duration = 0;
+    doLoop = false;
+    if(Date.now() - start > FRAME_DURATION){
+        start = Date.now()
+        doLoop = true;
     }
+    // current_frame_duration += Date.now() - start;
+    // if (current_frame_duration - start > FRAME_DURATION) {
+    //     current_frame_duration = 0;
+    // }
 
     requestAnimationFrame(gameLoop);
 }
