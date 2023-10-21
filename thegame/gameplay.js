@@ -1,6 +1,7 @@
 
 var data;
 var running = false;   
+var loading = false;
 
 let rightPressed;
 let leftPressed;
@@ -13,7 +14,15 @@ let ctx = canvas.getContext("2d");
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
+let players = [];
 let player1 = new Block();
+players.push(player1);
+
+let platforms = [];
+let platform1 = new Platform(200, 350, 100, 300);
+platforms.push(platform1);
+let platform2 = new Platform(300, 470, 100, 30);
+platforms.push(platform2);
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -25,7 +34,6 @@ function keyDownHandler(e) {
     else if(e.key == "Up" || e.key == "ArrowUp") {
         upPressed = true;
     }
-    
 }
 
 function keyUpHandler(e) {
@@ -43,7 +51,10 @@ function keyUpHandler(e) {
 
 function updateGameData() {
     // update position and check for collision
-    player1.update();
+    players.forEach((player)=>{
+        player.update(platforms)
+    });
+
 }
 
 function drawLevel() {
@@ -62,43 +73,54 @@ function draw() {
     // players
     // On top of screen UI
     drawLevel();
-    player1.draw();
+    players.forEach((player)=>{
+        player.draw()
+    });
+    platforms.forEach((platform)=>{
+        platform.draw()
+    });
+
 }
 
 function gameLoop() {
-    // potentially pull from server for multiplayer data
-    // update game data
-    updateGameData();
-    draw();
+    if(running == true && loading == false){
+        document.getElementById("titleScreen").style.display = "none"
+        document.getElementById("loading").style.display = "none"
+        // potentially pull from server for multiplayer data
+        // update game data
+        updateGameData();
+        draw();
+        console.log(data);
+   } else if(running == false && loading == true){
+        document.getElementById("titleScreen").style.display = "none"
+        document.getElementById("loading").style.display = "flex"
 
-    // draw
-    requestAnimationFrame(gameLoop);
-    if(running == true){
-      console.log(data);
-    }
+
+   }
+   requestAnimationFrame(gameLoop);
+
 
 }
 function bootstrapGame(form){
     console.log(form)
+    loading = true;
     fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
-    .then(run => running = true);
-
-    gameStart();
+    .then(run => running = true)
+    .then(run2 => loading = false);
 }
 
 
 function gameStart() {
     // load assets
  
-    
     // load levels and initiate characters
-    if(document.getElementById("titleScreen").style.visibility == "visible"){
+    if(document.getElementById("titleScreen").style.visibility != "visible"){
         gameLoop();
     }
     
 }
 
-
+gameStart();

@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="container">
-        <canvas id="gamescreen"></canvas>
+        <canvas id="gamescreen" width="800" height="500"></canvas>
         <div id="titleScreen">
             <h1>AI RUNDOWN</h1>
             <form action="" method="GET">
@@ -40,13 +40,15 @@
                     <input class="buttons" type="button" value="3 PLAYER">
                     <input class="buttons" type="button" value="4 PLAYER">
                 </div>
-                <input class="buttons" type="button" value="Click" onclick="bootstrapGame(this.form)">
+                <input class="buttons" id="start" type="button" value="START" onclick="bootstrapGame(this.form)">
             </form>
-            
+        </div>
+        <div id="loading">
+            I am loading
         </div>
     </div>
     <script src="Block.js"></script>
-    <!-- <script src="Platform.js"></script> -->
+    <script src="Platform.js"></script>
     <script src="gameplay.js"></script>
 </body>
 </html>
