@@ -101,6 +101,7 @@ class Block {
                 else {
                     this.onPlatform = false;
                 }
+                
             }
         });
         

@@ -2,6 +2,10 @@
 var data;
 var running = false;   
 var loading = false;
+
+const FPS = 60;
+const FRAME_DURATION = 8 / FPS;
+let current_frame_duration = 0;
 var questionPrint = false;
 
 let rightPressed;
@@ -84,6 +88,7 @@ function draw() {
 }
 
 function gameLoop() {
+    let start = Date.now();
     if(running == true && loading == false){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "none";
@@ -94,20 +99,26 @@ function gameLoop() {
             document.getElementById("questionBox").appendChild(question);
             questionPrint = true;
         }
-        // potentially pull from server for multiplayer data
-        // update game data
-        updateGameData();
-        draw();
-        console.log(data);
+
+        if(current_frame_duration === 0){
+            // potentially pull from server for multiplayer data
+            // update game data
+            updateGameData();
+            draw();
+            console.log(data);
+        }
    } else if(running == false && loading == true){
         document.getElementById("titleScreen").style.display = "none"
         document.getElementById("loading").style.display = "flex"
 
 
-   }
-   requestAnimationFrame(gameLoop);
+    }
+    current_frame_duration += Date.now() - start;
+    if (current_frame_duration > FRAME_DURATION) {
+        current_frame_duration = 0;
+    }
 
-
+    requestAnimationFrame(gameLoop);
 }
 function bootstrapGame(form){
     console.log(form)
