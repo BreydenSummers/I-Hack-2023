@@ -28,4 +28,19 @@ function keyUpHandler(e) {
     }
 }
 
-function 
+function gameLoop() {
+    // potentially pull from server for multiplayer info
+    // update game data
+    // draw
+    requestAnimationFrame(gameLoop);
+}
+
+function gameStart() {
+    // load assets
+    // load levels and initiate characters
+    gameLoop();
+}
+
+gameStart();
+
+
