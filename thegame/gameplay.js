@@ -66,13 +66,18 @@ function draw() {
 }
 
 function gameLoop() {
-    // potentially pull from server for multiplayer data
-    // update game data
-    updateGameData();
-    draw();
+    console.log("I am running")
+    if(running == true){
+        document.getElementById("titleScreen").style.visibility = "hidden"
+        // potentially pull from server for multiplayer data
+        // update game data
+        updateGameData();
+        draw();
+        // draw
+        console.log(data);
+   }
+   requestAnimationFrame(gameLoop);
 
-    // draw
-    requestAnimationFrame(gameLoop);
 
 }
 function bootstrapGame(form){
@@ -83,22 +88,20 @@ function bootstrapGame(form){
     .then(jsonData => console.log(jsonData))
     .then(run => running = true);
 
-    gameStart();
+    // gameStart();
 }
 
 
 function gameStart() {
     // load assets
-    document.getElementById("start").addEventListener('click', function (){
-        console.log("Happy Wedding C/ McKee!");
-        document.getElementById("titleScreen").style.visibility = "hidden";
-    })
-    
+ 
     // load levels and initiate characters
     if(document.getElementById("titleScreen").style.visibility != "visible"){
         gameLoop();
     }
     
 }
+
+gameStart();
 
 
