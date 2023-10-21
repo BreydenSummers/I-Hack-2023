@@ -18,14 +18,47 @@ body {
     z-index: 10;
 }
 
-
-
 #titleScreen{
     position: absolute;
     height: 600px;
     width: 1200px;
-    background-color: aquamarine;
-    
+    background-color: rgb(36, 36, 36);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#titleScreen h1{
+    color: aliceblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-stretch: expanded;
+    font-size: 155px;
+    margin: 0px;
+    margin-bottom: 80px;
+    text-decoration: underline wavy orange;
+
+}
+
+input{
+    width: 600px;
+    height: auto;
+    text-align: center;
+    font-size: 24px;
+}
+
+form{
+    margin-bottom: 40px;
+}
+
+label{
+    font-size: 40px;
+    color: aliceblue;
+    text-justify: newspaper;
+}
+
+#playerCount{
+    margin-bottom: 100px;
 }
 
 .wrapper{
