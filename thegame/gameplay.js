@@ -24,10 +24,24 @@ let player1 = new Block();
 players.push(player1);
 
 let platforms = [];
-let platform1 = new Platform(200, 350, 100, 300);
-platforms.push(platform1);
-let platform2 = new Platform(300, 470, 100, 30);
-platforms.push(platform2);
+// let platform1 = new Platform(200, 350, 100, 300);
+// platforms.push(platform1);
+// let platform2 = new Platform(300, 470, 100, 30);
+// platforms.push(platform2);
+
+
+let game1Platforms = [
+    new Platform( canvas.width/2, canvas.height/2),
+    new Platform(100, canvas.height-(canvas.height/6)),
+    new Platform(300, canvas.height-(canvas.height/4))
+
+]
+
+let game1 = new Map(game1Platforms);
+
+
+
+
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -57,7 +71,7 @@ function keyUpHandler(e) {
 function updateGameData() {
     // update position and check for collision
     players.forEach((player)=>{
-        player.update(platforms)
+        player.update(game1.platforms)
     });
 
 }
@@ -65,6 +79,7 @@ function updateGameData() {
 function drawLevel() {
     ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    game1.render();
     // ctx.fillStyle = "white";
     // ctx.fillRect(200, 200, 50, 50);
     // ctx.fillStyle = "brown";
@@ -81,7 +96,7 @@ function draw() {
     players.forEach((player)=>{
         player.draw()
     });
-    platforms.forEach((platform)=>{
+    game1.platforms.forEach((platform)=>{
         platform.draw()
     });
 
