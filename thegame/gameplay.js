@@ -205,7 +205,6 @@ function gameLoop() {
                 // update game data
                 updateGameData();
                 draw();
-                console.log(data);
             }
         } else{
             if(questionBool == false){
@@ -234,7 +233,6 @@ function gameLoop() {
             // update game data
             updateGameData();
             draw();
-            console.log(data);
         }
    } else if(running == false && loading == true){
         document.getElementById("titleScreen").style.display = "none"
@@ -255,7 +253,6 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 function bootstrapGame(form){
-    console.log(form)
     loading = true;
     fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
     .then(response => response.json())
@@ -270,7 +267,6 @@ function bootstrapGame(form){
         answer2 = data["answers"]["B"];
         answer3 = data["answers"]["C"];
         answer4 = data["answers"]["D"];
-        console.log(AnswerPos[0][0])
         setupAnswer(AnswerPos[0][0],AnswerPos[0][1],answer1, "A" == data["solution"]);
         setupAnswer(AnswerPos[1][0],AnswerPos[1][1],answer2, "B" == data["solution"]);
         setupAnswer(AnswerPos[2][0],AnswerPos[2][1],answer3, "C" == data["solution"]);
@@ -284,7 +280,6 @@ function gameStart() {
     // load levels and initiate characters
     if(document.getElementById("titleScreen").style.display != "none"){
         gameLoop();
-        console.log('rusd');
     }
     
 }
