@@ -20,9 +20,13 @@ class Block {
     }
 
     blockJump() {
-        if ( upPressed && true ) { // true should be on platform
-            this.motionY = -5;
+        if ( upPressed && this.onBottom() ) { // true should be on platform
+            this.motionY = -7;
         }
+    }
+
+    onBottom() {
+        return this.y >= canvas.height - this.height;
     }
 
     // takes in a platform object as an argument. returns if block is on platform
@@ -57,6 +61,11 @@ class Block {
         if ( this.y <= 0 ) {
             this.motionY = 0;
             this.y = 0;
+        }
+
+        if ( this.onBottom() ) {
+            this.motionY = 0;
+            this.y = canvas.height - this.height;
         }
     }
 }
