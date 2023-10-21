@@ -8,9 +8,12 @@ const FRAME_DURATION = 8 / FPS;
 let current_frame_duration = 0;
 var questionPrint = false;
 
-let rightPressed;
-let leftPressed;
-let upPressed;
+let rightPressed1;
+let leftPressed1;
+let upPressed1;
+let rightPressed2;
+let leftPressed2;
+let upPressed2;
 const GRAVITY = 0.6;
 
 let canvas = document.getElementById("gamescreen");
@@ -20,8 +23,10 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 let players = [];
-let player1 = new Block();
+let player1 = new Block("#FF46F4");
 players.push(player1);
+let player2 = new Block("#0ff");
+players.push(player2);
 
 
 
@@ -58,10 +63,6 @@ let game2Platforms = [
 
 let game1 = new Map(game2Platforms);
 
-
-
-
-
 let Answers = [];
 let AnswerPos = [[400,400], [0,200], [500, 400], [200,200]]
 function setupAnswer(x, y, text, correct){
@@ -72,34 +73,65 @@ function setupAnswer(x, y, text, correct){
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = true;
+        rightPressed1 = true;
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
-        leftPressed = true;
+        leftPressed1 = true;
     }
     else if(e.key == "Up" || e.key == "ArrowUp") {
-        upPressed = true;
+        upPressed1 = true;
+    }
+    if(e.key == "d") {
+        rightPressed2 = true;
+    }
+    else if(e.key == "a") {
+        leftPressed2 = true;
+    }
+    else if(e.key == "w") {
+        upPressed2 = true;
     }
 }
 
 function keyUpHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = false;
+        rightPressed1 = false;
     }
     else if(e.key == "Left" || e.key == "ArrowLeft") {
-        leftPressed = false;
+        leftPressed1 = false;
     }
     else if(e.key == "Up" || e.key == "ArrowUp") {
-        upPressed = false;
+        upPressed1 = false;
+    }
+    if(e.key == "d") {
+        rightPressed2 = false;
+    }
+    else if(e.key == "a") {
+        leftPressed2 = false;
+    }
+    else if(e.key == "w") {
+        upPressed2 = false;
     }
 }
 
 
 function updateGameData() {
     // update position and check for collision
-    players.forEach((player)=>{
-        player.update(game1.platforms)
-    });
+    player1.update(
+        game1.platforms, 
+        {
+            upPressed: upPressed1 && true,
+            leftPressed: leftPressed1 && true,
+            rightPressed: rightPressed1 && true
+        }
+    )
+    player2.update(
+        game1.platforms, 
+        {
+            upPressed: upPressed2 && true,
+            leftPressed: leftPressed2 && true,
+            rightPressed: rightPressed2 && true
+        }
+    )
     Answers.forEach((answer) => {
         answer.update(players)
     })
