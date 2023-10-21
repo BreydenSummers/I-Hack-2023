@@ -30,7 +30,8 @@ players.push(player1);
 let player2 = new Block("#0ff");
 players.push(player2);
 
-var mapNum = Math.floor(Math.random() * 2) + 1;
+// var mapNum = Math.floor(Math.random() * 2) + 1;
+var mapNum = 3;
 let platforms = [];
 let Answers = [];
 let AnswerPos = [[0,0], [0,0], [0,0], [0,0]];
@@ -66,13 +67,20 @@ else if (mapNum == 2){
 }
 else if (mapNum == 3){
     gamePlatforms = [
-        new Platform(155, 200, 100, 30),
-        new Platform(255, 175, 100, 30),
-        new Platform(355, 150, 100, 30),
-        new Platform(455, 175, 100, 30),
-        new Platform(555, 200, 100, 30)
+        new Platform(355, 200, 25, 270),
+        new Platform(455, 175, 25, 290),
+        new Platform(555, 150, 25, 300),
+        new Platform(655, 175, 25, 290),
+        new Platform(755, 200, 25, 270),
+        new Platform(0, 0, 20, 555),
+        new Platform(0, 445, 165, 25),
+        new Platform(205, 390, 165, 25),
+        new Platform(0, 345, 160, 25),
+        new Platform(205, 290, 165, 25),
+        new Platform(0, 245, 155, 25),
+        new Platform(205, 200, 165, 25)
     ];
-    AnswerPos = [[0, 40], [0, 375], [canvas.width-100, 375], [canvas.width-100 , 40]];
+    AnswerPos = [[365, 180], [465, 150], [570, 150], [670, 180]];
 }
 
 
