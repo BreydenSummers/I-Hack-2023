@@ -82,9 +82,8 @@ function draw() {
 }
 
 function gameLoop() {
-    console.log("I am running")
     if(running == true){
-        document.getElementById("titleScreen").style.display = "none"
+        document.getElementById("titleScreen").style.visibility = "hidden"
         // potentially pull from server for multiplayer data
         // update game data
         updateGameData();
@@ -111,7 +110,9 @@ function gameStart() {
     // load assets
  
     // load levels and initiate characters
-    gameLoop();
+    if(document.getElementById("titleScreen").style.visibility != "visible"){
+        gameLoop();
+    }
     
 }
 
