@@ -7,6 +7,7 @@ var questionBool = false;
 var winning_player = null;
 var winning = false;
 var show_winning_time = Date.now();
+var useDefault = false;
 
 const FPS = 60;
 const FRAME_DURATION = 8 / FPS;
@@ -217,7 +218,7 @@ function gameLoop() {
         if(Date.now() - questionTime > 5000){
             if(questionPrint == false){
                 const question = document.createElement("h1");
-                question.innerHTML = data['question'];
+                question.innerHTML = useDefault ? "3 * 3" : data['question'];
                 question.id = "question";
                 document.getElementById("questionBox").appendChild(question);
                 questionPrint = true;
@@ -236,7 +237,7 @@ function gameLoop() {
         } else{
             if(questionBool == false){
                 const question = document.createElement("h1");
-                question.innerHTML = data['question'];
+                question.innerHTML = useDefault ? "3 * 3" : data['question'];
                 question.id = "questionloading";
                 document.getElementById("questionDisplay").appendChild(question);
 
@@ -276,8 +277,18 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 function bootstrapGame(form){
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const abortBtn = document.getElementById("skip-ai");
+
+    abortBtn.addEventListener("click", () => {
+    controller.abort();
+    console.log("Fetch aborted");
+    });
+
     loading = true;
-    fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value)
+    fetch("http://34.41.134.6:5000/getquestion/" + form.callai.value, { signal })
     .then(response => response.json())
     .then(jsonData => data = jsonData)
     .then(jsonData => console.log(jsonData))
@@ -285,7 +296,6 @@ function bootstrapGame(form){
     .then(run1 => running = true)
     .then(run2 => loading = false)
     .then(run3 => {
-
         answer1 = data["answers"]["A"];
         answer2 = data["answers"]["B"];
         answer3 = data["answers"]["C"];
@@ -297,7 +307,23 @@ function bootstrapGame(form){
     })
     .then(run4 => {if(playerNum == 1){
         player2.x = 100000000000;
-}});
+    }})
+    .catch(()=>{
+        console.log("New stuff");
+        answer1 = "9";
+        answer2 = "12";
+        answer3 = "8";
+        answer4 = "33";
+        setupAnswer(AnswerPos[0][0],AnswerPos[0][1],answer1, "A" == "A");
+        setupAnswer(AnswerPos[1][0],AnswerPos[1][1],answer2, "B" == "A");
+        setupAnswer(AnswerPos[2][0],AnswerPos[2][1],answer3, "C" == "A");
+        setupAnswer(AnswerPos[3][0],AnswerPos[3][1],answer4, "D" == "A");
+        questionTime = Date.now();
+        running = true;
+        loading = false;
+        if(playerNum == 1) player2.x = 100000000000;
+        useDefault = true;
+    });
 }
 
 
